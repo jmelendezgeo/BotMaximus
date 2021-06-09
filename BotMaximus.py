@@ -54,9 +54,9 @@ def extract_phonenumber():
         return ''
 
 def update_dataframe(new):
-    old_dataframe = pd.read_excel("data_cleaned.xlsx", sheet_name="Epaces",index_col = 0)
+    old_dataframe = pd.read_excel("data_cleaned.xlsx", sheet_name="Epaces")
     old_dataframe.update(new)
-    old_dataframe.to_excel("data_cleaned.xlsx", sheet_name="Epaces")
+    old_dataframe.to_excel("data_cleaned.xlsx", sheet_name="Epaces", index=False)
     print("El archivo original ya esta actualizado con la nueva informacion")
 
 
@@ -71,14 +71,14 @@ if __name__ =='__main__':
     #Seleccionar segundos para esperar. En este caso, entre 10 y 30 segundos
     seconds_to_wait = range(10,30)
 
-    epaces_df=pd.read_excel("data_cleaned.xlsx", sheet_name="Epaces",index_col = 0)
+    epaces_df=pd.read_excel("data_cleaned.xlsx", sheet_name="Epaces")
     columns_to_keep =['MedicaID','Sex','BirthDate','LastName','FirstName',]
     epaces_df = epaces_df[columns_to_keep]
     epaces_df["BirthDate"] = pd.to_datetime(epaces_df["BirthDate"])
     epaces_df["BirthDate"] = epaces_df.BirthDate.dt.strftime('%m/%d/%Y')
 
     #Definir el rango para procesar. Recuerda guardar el documento
-    epaces_df = epaces_df[205:1000]
+    epaces_df = epaces_df[2400:2500]
 
     print(f"Vamos a procesar {len(epaces_df)} registros")
     counter = 0
